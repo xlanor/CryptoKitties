@@ -58,7 +58,7 @@ class Commands():
 												ETH: """+str(convertedeth)
 
 									bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
-					counter += 1
+					counter += 100
 					print (str(counter)+" has been scraped")
 				else:
 					trigger = False
