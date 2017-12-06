@@ -4,21 +4,25 @@
 # Cryptokitties cmd.
 # Written by xlanor
 ##
-
+from ghost import Ghost
+import urllib.request
 from tokens import Tokens
 import datetime
 import requests
 import time
 import json
+import os
 from web3 import Web3, HTTPProvider, IPCProvider
 import multiprocessing as mp
 from multiprocessing import Pool
 from telegram import ReplyKeyboardMarkup,ChatAction,InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler,Job,ConversationHandler
 import traceback
+import contextlib
 
 class Commands():
 	def broadcast(bot,update):
+		ghost = Ghost()
 		return_array = []
 		cat_list = ["spock","beard","mauveover","cymric","gold","otaku","saycheese","googly","mainecoon","whixtensions","wingtips","chestnut","jaguar"]
 		counter = 0
@@ -33,7 +37,7 @@ class Commands():
 				if counter <= 1000:
 					if r['auctions']:
 						for kitten in r['auctions']:
-							if kitten['kitty']['generation'] <= 6:
+							if kitten['kitty']['generation'] <= 7:
 								if kitten['kitty']['status']['cooldown_index'] < 4:
 									cattribute_api = "https://api.cryptokitties.co/kitties/"+str(kitten['kitty']['id'])
 									cattribute = requests.get(cattribute_api).json()
@@ -60,25 +64,37 @@ class Commands():
 											message += str(kitten['kitty']['id']) if kitten['kitty']['id'] else "Null"
 											message += "\nCattributes: "
 											for x in cattribute_list:
-												if x == each:
+												if x in cat_list:
 													message += "<b>"
 													message += str(x)
 													message += "</b>"
 												else:
 													message += str(x)
-												message += ","
-											message += "\n👨‍🚀Alerting: @nthwin @iczac"
+												message += ", "
+											message += "\n👨‍🚀Alerting: @nthwin @iczac @jaynertwx"
+											filename = "/home/elanor/ftp/files/cryptokitties/images/"+str(kitten['kitty']['id'])+".png"
+											with ghost.start() as session:
+												session.open(cattribute['image_url'])
+												session.capture_to(filename)
+											"""
+											svg_filename  = "/home/elanor/ftp/files/cryptokitties/images/"+str(kitten['kitty']['id'])+".svg"
+											
+											f = open(svg_filename,'wb')
+											f.write(urllib.request.urlopen(cattribute['image_url']).read())
+											f.close()
+											cairosvg.svg2png(url=svg_filename, write_to=filename)"""
 
 											bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
+											bot.sendPhoto(chat_id=Tokens.channel('livechannel'),photo=open(filename,'rb'))
+											os.remove(filename)
 											break
 
+					scrapednumber = "Nthwin "+str(counter)+" scraped"
 					counter += 100
+					bot.sendMessage(chat_id=Tokens.channel('errorchannel'),text=scrapednumber,parse_mode='HTML')
 					print (str(counter)+" has been scraped")
 				else:
 					trigger = False
-					current_time = datetime.datetime.now().strftime("%B %d, %Y %H:%M:%S")
-					message = "API checked on "+current_time+"."
-					bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
 					
 			except:
 				#API will time out after x amount of requests. need to let it sleep then resume.
@@ -91,6 +107,7 @@ class Commands():
 				time.sleep(15)
 
 	def kleongbroadcast(bot,update):
+		ghost = Ghost()
 		cat_list = ["spock","beard","mauveover","cymric","gold","otaku","saycheese","googly","mainecoon","whixtensions","wingtips","chestnut","jaguar"]
 		counter = 7188
 		kleongTrigger = True
@@ -130,23 +147,27 @@ class Commands():
 											message += str(kitten['kitty']['id']) if kitten['kitty']['id'] else "Null"
 											message += "\nCattributes: "
 											for x in cattribute_list:
-												if x == each:
+												if x in cat_list:
 													message += "<b>"
 													message += str(x)
 													message += "</b>"
 												else:
 													message += str(x)
-												message += ","
+												message += ", "
 											message += "\n👨‍🚀Alerting: @kelvinleong"
-
+											filename = "/home/elanor/ftp/files/cryptokitties/images/"+str(kitten['kitty']['id'])+".png"
+											with ghost.start() as session:
+												session.open(cattribute['image_url'])
+												session.capture_to(filename)
 											bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
+											bot.sendPhoto(chat_id=Tokens.channel('livechannel'),photo=cattribute['image_url'])
+											bot.sendPhoto(chat_id=Tokens.channel('livechannel'),photo=open(filename,'rb'))
+											os.remove(filename)
+											break
 					counter += 100
 					print ("Kleong"+ str(counter)+" has been scraped")
 				else:
-					kleongTrigger = False
-					current_time = datetime.datetime.now().strftime("%B %d, %Y %H:%M:%S")
-					message = "Kleong API checked on "+current_time+"."
-					bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
+					kleongTrigger = False	
 					
 			except:
 				#API will time out after x amount of requests. need to let it sleep then resume.
