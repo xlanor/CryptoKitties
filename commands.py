@@ -41,7 +41,7 @@ class Commands():
 									message += str(kitten['kitty']['name']) if kitten['kitty']['name'] else "Null"
 									message +="\nAddress: "
 									message += str(kitten['kitty']['owner']['address']) if kitten['kitty']['owner']['address'] else "Null"
-									message += "\nType: Sire "
+									message += "\nType: Sale "
 									message += "\nGeneration: "
 									message += str(kitten['kitty']['generation']) if kitten['kitty']['generation'] else "Null"
 									message += "\nCooldown Index: "
