@@ -1,0 +1,13 @@
+[Unit] 
+Description=CryptoKitties TG Bot service
+After=multi-user.target 
+
+[Service]
+Type=idle
+WorkingDirectory = /home/elanor/ftp/files/cryptokitties
+User=root
+Group=root
+ExecStart=/usr/bin/python3 cryptokitties.py 
+
+[Install]
+WantedBy=multi-user.target

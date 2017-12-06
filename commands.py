@@ -42,27 +42,32 @@ class Commands():
 										if each in cat_list:
 											result = kitten['current_price']
 											convertedeth = web3.fromWei(float(result),'ether')
-											message = " Name: "
+											message = " 🐈Name: "
 											message += str(kitten['kitty']['name']) if kitten['kitty']['name'] else "Null"
-											message +="\nAddress: "
+											message +="\n🏠Address: "
 											message += str(kitten['kitty']['owner']['address']) if kitten['kitty']['owner']['address'] else "Null"
-											message += "\n ID: "
+											message += "\n📛ID: "
 											message += str(kitten['kitty']['id']) if kitten['kitty']['id'] else "Null"
-											message += "\nType: Sale "
-											message += "\nGeneration: "
+											message += "\n🈹Type: Sale "
+											message += "\n📈Generation: "
 											message += str(kitten['kitty']['generation']) if kitten['kitty']['generation'] else "Null"
-											message += "\nCooldown Index: "
+											message += "\n📈Cooldown Index: "
 											message += str(kitten['kitty']['status']['cooldown_index']) if kitten['kitty']['status']['cooldown_index'] else "Null"
-											message += "\nETH: "
+											message += "\n🚀ETH: "
 											message += str(convertedeth)
-											message += "\nURL: "
+											message += "\n💻URL: "
 											message += "https://www.cryptokitties.co/kitty/"
 											message += str(kitten['kitty']['id']) if kitten['kitty']['id'] else "Null"
 											message += "\nCattributes: "
 											for x in cattribute_list:
-												message += str(x)
+												if x == each:
+													message += "<b>"
+													message += str(x)
+													message += "</b>"
+												else:
+													message += str(x)
 												message += ","
-											message += "\n@nthwin @iczac"
+											message += "\n👨‍🚀Alerting: @nthwin @iczac"
 
 											bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
 											break
@@ -107,27 +112,32 @@ class Commands():
 									for each in cattribute_list:
 										if each in cat_list:
 											convertedeth = web3.fromWei(float(result),'ether')
-											message = " Name: "
+											message = "🐈 Name: "
 											message += str(kitten['kitty']['name']) if kitten['kitty']['name'] else "Null"
-											message +="\nAddress: "
+											message +="\n🏠Address: "
 											message += str(kitten['kitty']['owner']['address']) if kitten['kitty']['owner']['address'] else "Null"
-											message += "\n ID: "
+											message += "\n📛ID: "
 											message += str(kitten['kitty']['id']) if kitten['kitty']['id'] else "Null"
-											message += "\nType: Sale "
-											message += "\nGeneration: "
+											message += "\n🈹Type: Sale "
+											message += "\n📈Generation: "
 											message += str(kitten['kitty']['generation']) if kitten['kitty']['generation'] else "Null"
-											message += "\nCooldown Index: "
+											message += "\n📈Cooldown Index: "
 											message += str(kitten['kitty']['status']['cooldown_index']) if kitten['kitty']['status']['cooldown_index'] else "Null"
-											message += "\nETH: "
+											message += "\n🚀ETH: "
 											message += str(convertedeth)
-											message += "\nURL: "
+											message += "\n💻URL: "
 											message += "https://www.cryptokitties.co/kitty/"
 											message += str(kitten['kitty']['id']) if kitten['kitty']['id'] else "Null"
 											message += "\nCattributes: "
 											for x in cattribute_list:
-												message += str(x)
+												if x == each:
+													message += "<b>"
+													message += str(x)
+													message += "</b>"
+												else:
+													message += str(x)
 												message += ","
-											message += "\n@kelvinleong"
+											message += "\n👨‍🚀Alerting: @kelvinleong"
 
 											bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
 					counter += 100
