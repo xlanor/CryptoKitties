@@ -29,7 +29,7 @@ class Commands():
 				sireurl = "https://api.cryptokitties.co/auctions?offset="+str(counter)+"&limit=100&type=sire&status=open&sorting=cheap&orderBy=current_price&orderDirection=asc"
 				r = requests.get(url).json()
 				q = requests.get(sireurl).json()
-				if counter <= 100:
+				if counter <= 1000:
 					if r['auctions']:
 						for kitten in r['auctions']:
 							if kitten['kitty']['generation'] <= 6:
