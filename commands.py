@@ -36,26 +36,38 @@ class Commands():
 								if kitten['kitty']['status']['cooldown_index'] < 4:
 									result = kitten['current_price']
 									convertedeth = web3.fromWei(float(result),'ether')
-									message = """Name: """+kitten['kitty']['name']+"""\n
-												Address: """+kitten['kitty']['owner']['address']+"""\n
-												Type: Sale
-												Generation: """+kitten['kitty']['status']['cooldown_index']+"""
-												Cooldown Index: """+kitten['kitty']['status']['cooldown_index']+"""
-												ETH: """+str(convertedeth)
-
+									
+									message = " Name: "
+									message += str(kitten['kitty']['name']) if kitten['kitty']['name'] else "Null"
+									message +="\nAddress: "
+									message += str(kitten['kitty']['owner']['address']) if kitten['kitty']['owner']['address'] else "Null"
+									message += "\nType: Sire "
+									message += "\nGeneration: "
+									message += str(kitten['kitty']['generation']) if kitten['kitty']['generation'] else "Null"
+									message += "\nCooldown Index: "
+									message += str(kitten['kitty']['status']['cooldown_index']) if kitten['kitty']['status']['cooldown_index'] else "Null"
+									message += "\nETH: "
+									message += str(convertedeth)
 									bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
 					if q['auctions']:
 						for sirekitten in q['auctions']:
 							if sirekitten['kitty']['generation'] <= 6:
 								if sirekitten['kitty']['status']['cooldown_index'] < 4:
 									result = sirekitten['current_price']
+
 									convertedeth = web3.fromWei(float(result),'ether')
-									message = """Name: """+sirekitten['kitty']['name']+"""\n
-												Address: """+sirekitten['kitty']['owner']['address']+"""\n
-												Type: Sire
-												Generation: """+kitten['kitty']['status']['cooldown_index']+"""
-												Cooldown Index: """+kitten['kitty']['status']['cooldown_index']+"""
-												ETH: """+str(convertedeth)
+									
+									message = " Name: "
+									message += str(sirekitten['kitty']['name']) if sirekitten['kitty']['name'] else "Null"
+									message +="\nAddress: "
+									message += str(sirekitten['kitty']['owner']['address']) if sirekitten['kitty']['owner']['address'] else "Null"
+									message += "\nType: Sire "
+									message += "\nGeneration: "
+									message += str(sirekitten['kitty']['generation']) if sirekitten['kitty']['generation'] else "Null"
+									message += "\nCooldown Index: "
+									message += str(sirekitten['kitty']['status']['cooldown_index']) if sirekitten['kitty']['status']['cooldown_index'] else "Null"
+									message += "\nETH: "
+									message += str(convertedeth)
 
 									bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
 					counter += 100
