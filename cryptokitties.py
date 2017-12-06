@@ -16,6 +16,7 @@ def Cryptokitties():
 	dispatcher = updater.dispatcher
 	j = updater.job_queue
 	job_minute = j.run_repeating(Commands.broadcast,150,0)
+	job_minute = j.run_repeating(Commands.kleongbroadcast,150,0)
 	updater.start_polling()
 	updater.idle
 
