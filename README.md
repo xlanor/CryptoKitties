@@ -6,7 +6,7 @@ Will clean up more when Im free and add more options to customize the parameters
 
 ## Sample Output
 
-![Screenshot](/images/screenshot.jpg | width = 300)
+![Screenshot](/images/screenshot.jpg | width=300)
 
 ## Licensing
 
