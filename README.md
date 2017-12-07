@@ -8,6 +8,8 @@ Please take note that this was a customized bot for my colleagues, I didn't expe
 
 Feel free to take it, modify the code, run it as your own instance, improve it, bla bla.
 
+Thanks to [Python-Telegram-Bot](https://github.com/python-telegram-bot/python-telegram-bot).
+
 ## Sample Output
 <img src="/images/screenshot.jpg" width="300">
 
