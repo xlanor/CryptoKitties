@@ -4,9 +4,10 @@
 # Broadcast Module
 # Written by xlanor
 ##
-import json,traceback,requests,sys
+import json,traceback,requests,sys,wand,os,contextlib
 from web3 import Web3, HTTPProvider, IPCProvider
 import time
+from wand.image import Image
 sys.path.append("/home/elanor/ftp/files/cryptokitties")
 
 sess = requests.Session()
@@ -43,6 +44,9 @@ class get_Data():
 			return [0,2000]
 		else:
 			return [8188,11000]
+	def image_filepath(self):
+		#modify this to where you want cat pictures to be saved
+		return "/home/elanor/ftp/files/cryptokitties/modules/kitty_pictures/"
 
 	def thwinBC(self):
 		return_dict = {}
@@ -68,6 +72,7 @@ class get_Data():
 									#We found a cat! lets check cattributes
 									cattribute_api = "https://api.cryptokitties.co/kitties/"+str(kitten['kitty']['id'])
 									cattribute = sess.get(cattribute_api).json()
+									cat_image_url = cattribute['image_url']
 									cattribute_list = cattribute['cattributes']
 
 									cattribute_list = [x["description"] for x in cattribute_list]
@@ -89,6 +94,19 @@ class get_Data():
 										found_cat["price"] = str(convertedeth)
 										found_cat["url"] = ("https://www.cryptokitties.co/kitty/" + (str(kitten['kitty']['id']) if kitten['kitty']['id'] else "Null"))
 										found_cat["cattribute"] = cattribute_list
+										#save image file and place the file path in the array so that we can access it later
+										image_response = sess.get(cat_image_url)
+										if image_response.status_code == 200:
+											filepath = "".join([self.image_filepath(),str(kitten['kitty']['id']),".svg"])
+											jpgfilepath = "".join([self.image_filepath(),str(kitten['kitty']['id']),".jpg"])
+											with open(filepath,"wb") as f:
+												f.write(image_response.content)
+											with Image(filename=filepath) as img:
+												img.format = 'jpg'
+												img.save(filename=jpgfilepath)
+												os.remove(filepath) #deletes vector file
+												found_cat["image"] = jpgfilepath
+												
 										# put into a dictionary to return.
 										if user in return_dict:
 											return_dict[user][str(kitten['kitty']['id'])]=found_cat

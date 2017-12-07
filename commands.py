@@ -8,6 +8,8 @@ from tokens import Tokens
 import datetime
 import time
 import json
+import ssl
+import os
 from telegram import ReplyKeyboardMarkup,ChatAction,InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler,Job,ConversationHandler
 import traceback
@@ -42,11 +44,27 @@ class Commands():
 								message +=  ","
 
 						if user == "thwin":
-							message += "\n👨‍🚀Alerting: @nthwin @iczac @jaynertwx"
+							message += "\n👨‍🚀Alerting: @nthwin @iczac"
 						else:
 							message += "\n👨‍🚀Alerting: @kelvinleong"
 
-						bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
+						while True:
+							try:
+								bot.sendMessage(chat_id=Tokens.channel('livechannel'),text=message,parse_mode='HTML')
+								if "image" in kitten:
+									bot.sendPhoto(chat_id=Tokens.channel('livechannel'),photo=open(kitten["image"],'rb'))
+									os.remove(kitten["image"])
+						
+							except:
+								# more timeouts. Im trying to break the habit of doing this, but I cant seem to catch
+								# the socket.timeout error that is thrown by telegram's servers even if I explicitly
+								# state socket.timeout. Appreciate some help if anyone can help.
+								print("caught an exception here")
+								time.sleep(2)
+							else:
+								break
+
+
 		except:
 			#All encompassing try excepts are generally not good idea.
 			# but I want to be notified in this case.

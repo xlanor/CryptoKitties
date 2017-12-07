@@ -10,8 +10,15 @@ Feel free to take it, modify the code, run it as your own instance, improve it, 
 
 Thanks to [Python-Telegram-Bot](https://github.com/python-telegram-bot/python-telegram-bot).
 
+## Requirements
+
+* Python3
+* ImageMagick
+* Python Telegram Bot
+* wand
+
 ## Sample Output
-<img src="/images/screenshot.jpg" width="300">
+<img src="/images/catscreen.png" width="300">
 
 
 ## Licensing
