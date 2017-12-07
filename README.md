@@ -4,6 +4,10 @@ A telegram bot to scan CryptoKitties API to report on kittens with a certain des
 
 Will clean up more when Im free and add more options to customize the parameters.
 
+Please take note that this was a customized bot for my colleagues, I didn't expect to receive so much traffic on it.
+
+Feel free to take it, modify the code, run it as your own instance, improve it, bla bla.
+
 ## Sample Output
 <img src="/images/screenshot.jpg" width="300">
 
