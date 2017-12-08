@@ -54,8 +54,8 @@ class get_Data():
 	def image_filepath(self):
 		#modify this to where you want cat pictures to be saved
 		picturedir = os.path.join(os.path.dirname(__file__), 'kitty_pictures/')
-		sys.path.append(picturedir)
-
+		
+		return picturedir
 
 
 	def thwinBC(self):
