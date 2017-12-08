@@ -19,7 +19,7 @@ Thanks to [Python-Telegram-Bot](https://github.com/python-telegram-bot/python-te
 * PyMySQL
 
 ## Sample Output
-<img src="/images/catscreen.png" width="300">
+<img src="/github_images/catscreen.png" width="300">
 
 
 ## General Setup guide
