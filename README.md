@@ -16,6 +16,7 @@ Thanks to [Python-Telegram-Bot](https://github.com/python-telegram-bot/python-te
 * ImageMagick
 * Python Telegram Bot
 * wand
+* PyMySQL
 
 ## Sample Output
 <img src="/images/catscreen.png" width="300">
