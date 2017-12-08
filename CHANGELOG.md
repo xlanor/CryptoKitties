@@ -1,3 +1,11 @@
+## 081217 - 1812
+- Fixed the api (again, missed out a parameter).
+- Api should now ONLY return the results for, say generation index is set to 6, it will only return gen 6 and below.
+- Basically dont set your offset too high or it's going to take forever to pull the API.
+- Switched to Relative pathing.
+- Renamed the github screenshot folder to make it less confusing.
+
+
 ## 081217 - 1427
 - Added individual usage.
 - I reccomend that you disable the group repeating job if you enable individual repeating.
