@@ -20,7 +20,7 @@ sess.mount('https://', adapter)
 class get_Data_Individual():
 	def urls(self,user_gen):
 		user_list = list(range(0,user_gen+1))
-		url = "&limit=100&type=sale&status=open&sorting=cheap&orderBy=current_price&orderDirection=asc&"
+		url = "&limit=100&type=sale&status=open&sorting=cheap&orderBy=current_price&orderDirection=asc&search="
 		for index,number in enumerate(user_list):
 			url += "gen:"
 			url += str(number)
