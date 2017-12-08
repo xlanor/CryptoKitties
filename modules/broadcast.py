@@ -17,16 +17,23 @@ sess.mount('https://', adapter)
 class get_Data():
 	def cat_list(self):
 		# list of some rare cattributes
-		cat_list = ["spock","beard","mauveover","cymric","gold","otaku","saycheese","googly","mainecoon","whixtensions","wingtips","chestnut","jaguar"]
+		cat_list = ["calicool","tigerpunk","spock","beard","mauveover","cymric","gold","otaku","saycheese","googly","mainecoon","whixtensions","wingtips","chestnut","jaguar"]
 		return cat_list
 
-	def urls(self):
-		url = "&limit=100&type=sale&status=open&sorting=cheap&orderBy=current_price&orderDirection=asc"
+	def urls(self,user):
+		user_gen = self.generation(user)
+		user_list = list(range(0,user_gen+1))
+		url = "&limit=100&type=sale&status=open&sorting=cheap&orderBy=current_price&orderDirection=asc&"
+		for index,number in enumerate(user_list):
+			url += "gen:"
+			url += str(number)
+			if (index < (len(user_list) -1)):
+				url += "+"
 		return url
 
 	def generation(self,user): #generation index to search for.
 		if user == "thwin":
-			return 6
+			return 5
 		else:
 			return 2
 
@@ -48,6 +55,9 @@ class get_Data():
 		#modify this to where you want cat pictures to be saved
 		return "/home/elanor/ftp/files/cryptokitties/modules/kitty_pictures/"
 
+
+
+
 	def thwinBC(self):
 		return_dict = {}
 		web3 = Web3(HTTPProvider('http://localhost:8545'))
@@ -60,7 +70,7 @@ class get_Data():
 			while trigger:
 				try:
 					# Pull the auction api data,
-					url = "https://api.cryptokitties.co/auctions?offset="+str(counter)+self.urls()
+					url = "https://api.cryptokitties.co/auctions?offset="+str(counter)+self.urls(user)
 					json_data = sess.get(url).json()
 					if counter <= self.offset(user)[1]:
 						if json_data['auctions']:
