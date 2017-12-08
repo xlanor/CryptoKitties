@@ -139,7 +139,7 @@ class Commands():
 					else:
 						cur.execute("""UPDATE User SET cooldown_index = %s WHERE telegram_id =  %s""",(update.message.text,uid,))
 						message = "Fantastic. Now, may I please have the offset starting point?"
-						message += "This bot will scan the api starting at the offset given"
+						message += "This bot will scan the api starting at the offset given. We recomend starting at 0"
 						update.message.reply_text(message,parse_mode='HTML')
 						return OFFSTART
 		except Exception as e:
@@ -161,7 +161,8 @@ class Commands():
 					else:
 						cur.execute("""UPDATE User SET offset_start = %s WHERE telegram_id =  %s""",(update.message.text,uid,))
 						message = "Fantastic. Now, may I please have the offset end point?"
-						message += "This bot will scan the api starting from the offset start to the offset end. It's not recomended to have a large range."
+						message += "This bot will scan the api starting from the offset start to the offset end. It's not recomended to have a large range.\n"
+						message += "A range of about 200 is recomended."
 						update.message.reply_text(message,parse_mode='HTML')
 						return OFFEND
 		except Exception as e:

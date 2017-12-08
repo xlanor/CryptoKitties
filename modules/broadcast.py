@@ -8,7 +8,7 @@ import json,traceback,requests,sys,wand,os,contextlib
 from web3 import Web3, HTTPProvider, IPCProvider
 import time
 from wand.image import Image
-sys.path.append("/home/elanor/ftp/files/cryptokitties")
+
 
 sess = requests.Session()
 adapter = requests.adapters.HTTPAdapter(max_retries = 20)
@@ -23,7 +23,7 @@ class get_Data():
 	def urls(self,user):
 		user_gen = self.generation(user)
 		user_list = list(range(0,user_gen+1))
-		url = "&limit=100&type=sale&status=open&sorting=cheap&orderBy=current_price&orderDirection=asc&"
+		url = "&limit=100&type=sale&status=open&sorting=cheap&orderBy=current_price&orderDirection=asc&search="
 		for index,number in enumerate(user_list):
 			url += "gen:"
 			url += str(number)
@@ -48,13 +48,13 @@ class get_Data():
 
 	def offset(self,user): #offset values min and max. Not reccomended to scan until infinity.
 		if user == "thwin":
-			return [0,2000]
+			return [0,200]
 		else:
-			return [8188,11000]
+			return [0,100]
 	def image_filepath(self):
 		#modify this to where you want cat pictures to be saved
-		return "/home/elanor/ftp/files/cryptokitties/modules/kitty_pictures/"
-
+		picturedir = os.path.join(os.path.dirname(__file__), 'kitty_pictures/')
+		sys.path.append(picturedir)
 
 
 

@@ -11,7 +11,7 @@ from web3 import Web3, HTTPProvider, IPCProvider
 import time
 from wand.image import Image
 
-sys.path.append("/home/elanor/ftp/files/cryptokitties")
+
 
 sess = requests.Session()
 adapter = requests.adapters.HTTPAdapter(max_retries = 20)
@@ -30,7 +30,8 @@ class get_Data_Individual():
 
 	def image_filepath(self):
 		#modify this to where you want cat pictures to be saved
-		return "/home/elanor/ftp/files/cryptokitties/modules/kitty_pictures/"
+		picturedir = os.path.join(os.path.dirname(__file__), 'kitty_pictures/')
+		return picturedir
 
 
 	def broadcast_user(self,user_info,att_list):
