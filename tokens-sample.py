@@ -14,3 +14,13 @@ class Tokens():
 			return "<enter error channel id>"
 		elif x == "livechannel":
 			return "<enter live channel id>"
+
+	def mysql(x):
+		if x == "host":
+			return "dbip"
+		elif x == "usn":
+			return "dblogin"
+		elif x == "pwd":
+			return "dbpw"
+		elif x == "db":
+			return "dbname"

@@ -1,3 +1,11 @@
+## 081217 - 1427
+- Added individual usage.
+- I reccomend that you disable the group repeating job if you enable individual repeating.
+- Requires mysql db.
+- Script for db structure provided.
+- You'll need to modify the code and tokens accordingly.
+- Updated API to include generation parameters to narrow the number of results per page
+
 ## 071217 - 2140
 
 - Added image support
