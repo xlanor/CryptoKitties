@@ -248,6 +248,84 @@ class Commands():
 			catcherror = traceback.format_exc()
 			bot.sendMessage(chat_id=Tokens.channel('errorchannel'),text=catcherror,parse_mode='HTML')
 
+	def list_cattributes(bot,update):
+		try:
+			with closing (pymysql.connect(Tokens.mysql('host'),Tokens.mysql('usn'),Tokens.mysql('pwd'),Tokens.mysql('db'),charset='utf8')) as conn:
+				conn.autocommit(True)
+				with closing(conn.cursor()) as cur:
+					uid = update.message.from_user.id
+					cur.execute("""SELECT * FROM Attribute WHERE telegram_id = %s""",(uid,))
+					if cur.rowcount == 0:
+						message = "You have no cattributes listed!"
+						update.message.reply_text(message,parse_mode='HTML')
+					else:
+						cattributes = cur.fetchall()
+						catlist = [x[1] for x in cattributes]
+						message = "".join(['Your current cattributes are: ',(", ".join(catlist))])
+						update.message.reply_text(message,parse_mode='HTML')
+
+		except Exception as e:
+			catcherror = traceback.format_exc()
+			bot.sendMessage(chat_id=Tokens.channel('errorchannel'),text=catcherror,parse_mode='HTML')
+
+	def remove_cattributes(bot,update,args):
+		try:
+			with closing (pymysql.connect(Tokens.mysql('host'),Tokens.mysql('usn'),Tokens.mysql('pwd'),Tokens.mysql('db'),charset='utf8')) as conn:
+				conn.autocommit(True)
+				with closing(conn.cursor()) as cur:
+					uid = update.message.from_user.id
+					try:
+						cattribute_to_remove = str.lower(args[0])
+					except IndexError:
+						reply_message = "Can't remove an empty string! Please use the following format: /rmcattributes cattributename" 
+						update.message.reply_text(reply_message,parse_mode='HTML')
+					else:
+						cur.execute("""SELECT * FROM Attribute 
+										WHERE telegram_id = %s 
+										AND LOWER(attribute_name) = LOWER(%s)
+									""",(uid,cattribute_to_remove,))
+						if cur.rowcount == 0:
+							reply_message = "Can't find that cattribute! please use /listcattributes to show your cattributes"
+							update.message.reply_text(reply_message,parse_mode='HTML')
+						else:
+							cur.execute("""DELETE FROM Attribute 
+											WHERE telegram_id = %s
+											AND LOWER (attribute_name) = LOWER(%s)
+											""",(uid,cattribute_to_remove,))
+							reply_message = "".join([str.lower(cattribute_to_remove), " has been sucessfully removed"])
+							update.message.reply_text(reply_message,parse_mode='HTML')
+
+		except Exception as e:
+			catcherror = traceback.format_exc()
+			bot.sendMessage(chat_id=Tokens.channel('errorchannel'),text=catcherror,parse_mode='HTML')
+
+	def add_cattributes(bot,update,args):
+		try:
+			with closing (pymysql.connect(Tokens.mysql('host'),Tokens.mysql('usn'),Tokens.mysql('pwd'),Tokens.mysql('db'),charset='utf8')) as conn:
+				conn.autocommit(True)
+				with closing(conn.cursor()) as cur:
+					uid = update.message.from_user.id
+					try:
+						cattribute_to_add = str.lower(args[0])
+					except IndexError:
+						reply_message = "Can't add an empty string! Please use the following format: /addcattributes cattributename" 
+						update.message.reply_text(reply_message,parse_mode='HTML')
+					else:
+						cur.execute("""SELECT * FROM Attribute 
+										WHERE telegram_id = %s 
+										AND LOWER(attribute_name) = LOWER(%s)
+									""",(uid,cattribute_to_add,))
+						if cur.rowcount > 0:
+							reply_message = "This cattribute is already added!"
+							update.message.reply_text(reply_message,parse_mode='HTML')
+						else:
+							cur.execute("""INSERT INTO Attribute VALUES(%s,%s)""",(uid,cattribute_to_add))
+							reply_message = "".join([str.lower(cattribute_to_add)," has been added to the table"])
+							update.message.reply_text(reply_message,parse_mode='HTML')
+		except Exception as e:
+			catcherror = traceback.format_exc()
+			bot.sendMessage(chat_id=Tokens.channel('errorchannel'),text=catcherror,parse_mode='HTML')
+
 	def alert(bot,update):
 		try:
 			with closing (pymysql.connect(Tokens.mysql('host'),Tokens.mysql('usn'),Tokens.mysql('pwd'),Tokens.mysql('db'),charset='utf8')) as conn:
