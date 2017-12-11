@@ -1,3 +1,8 @@
+## v1.0.0
+
+- Switched to semantic versioning.
+- Beginning to work on the issues pointed out by Spindel.
+
 ## 081217 - 1812
 - Fixed the api (again, missed out a parameter).
 - Api should now ONLY return the results for, say generation index is set to 6, it will only return gen 6 and below.
