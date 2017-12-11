@@ -1,3 +1,9 @@
+## v1.1.0
+
+- Added new commands to mannage cattribute list
+- Code restructuring on the back-end side (Thanks Spindel!)
+
+
 ## v1.0.0
 
 - Switched to semantic versioning.
