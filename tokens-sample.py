@@ -5,22 +5,24 @@
 # Written by xlanor
 ##
 class Tokens():
-	def bot_token(x):
-		if x == "live":
-			return '<enter your token>'
+		def __init__(self):
+		self.live = "bot token here"
+		self.errorchannel = "error channel here"
+		self.livechannel = "live channel here"
+		self.host = "host"
+		self.usn = "username"
+		self.pwd = "password"
+		self.db = "Cryptokitties"
 
-	def channel(x):
-		if x == "errorchannel":
-			return "<enter error channel id>"
-		elif x == "livechannel":
-			return "<enter live channel id>"
+	def mysql(self):
+		conn_string = {"host":self.host,"user":self.usn,"password":self.pwd,"db":self.db}
+		return conn_string
 
-	def mysql(x):
-		if x == "host":
-			return "dbip"
-		elif x == "usn":
-			return "dblogin"
-		elif x == "pwd":
-			return "dbpw"
-		elif x == "db":
-			return "dbname"
+	def bot_token(self):
+		return self.live
+
+	def error_channel(self):
+		return self.errorchannel
+
+	def live_channel(self):
+		return self.livechannel
