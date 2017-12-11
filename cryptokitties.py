@@ -36,13 +36,22 @@ def Cryptokitties():
 
 	alert_handler = CommandHandler('alert',Commands.alert)
 	dispatcher.add_handler(alert_handler)
+
+	list_handler = CommandHandler('listcattributes',Commands.list_cattributes)
+	dispatcher.add_handler(list_handler)
+
+	remove_cattribute = CommandHandler('rmcattributes',Commands.remove_cattributes, pass_args=True)
+	dispatcher.add_handler(remove_cattribute)
+
+	add_cattribute = CommandHandler('addcattributes',Commands.add_cattributes, pass_args=True)
+	dispatcher.add_handler(add_cattribute)
 	########################################################
 	#				Alert jobs
 	########################################################
 	j = updater.job_queue
 	# this particular job is for my colleagues and using the def broadcast and broadcast module.
 	# to broadcast to channels.
-	job_minute = j.run_repeating(Commands.broadcast,300,0)
+	#job_minute = j.run_repeating(Commands.broadcast,300,0)
 	job_minute = j.run_repeating(Commands.user_broadcast,150,0)
 	updater.start_polling()
 	updater.idle
