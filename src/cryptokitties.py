@@ -51,7 +51,7 @@ def Cryptokitties():
 	j = updater.job_queue
 	# this particular job is for my colleagues and using the def broadcast and broadcast module.
 	# to broadcast to channels.
-	job_minute = j.run_repeating(Commands().user_broadcast,150,0)
+	job_minute = j.run_repeating(Commands().user_broadcast,600,0)
 	updater.start_polling()
 	updater.idle
 
