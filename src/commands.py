@@ -333,22 +333,23 @@ class Commands():
 										message += tribute
 										if index < (len(kitten["cattribute"])-1):
 											message +=  ","
-									while True:
-										try:
-											bot.sendMessage(chat_id=each[0],text=message,parse_mode='HTML')
-											if "image" in kitten:
-												bot.sendPhoto(chat_id=each[0],photo=open(kitten["image"],'rb'))
-												os.remove(kitten["image"])
 									
-										except:
-											# more timeouts. Im trying to break the habit of doing this, but I cant seem to catch
-											# the socket.timeout error that is thrown by telegram's servers even if I explicitly
-											# state socket.timeout. Appreciate some help if anyone can help.
+									try:
+										bot.sendMessage(chat_id=each[0],text=message,parse_mode='HTML')
+										if "image" in kitten:
+											bot.sendPhoto(chat_id=each[0],photo=open(kitten["image"],'rb'))
+											os.remove(kitten["image"])
+								
+									except Exception as e:
+										# more timeouts. Im trying to break the habit of doing this, but I cant seem to catch
+										# the socket.timeout error that is thrown by telegram's servers even if I explicitly
+										# state socket.timeout. Appreciate some help if anyone can help.
+										
+										# seems like 10 second is the magic number - we'll try that
+										os.remove(kitten["image"])
+										pass
 											
-											# seems like 10 second is the magic number - we'll try that
-											time.sleep(10)
-										else:
-											break
+										
 
 		except:
 			#All encompassing try excepts are generally not good idea.

@@ -119,5 +119,4 @@ class get_Data_Individual():
 				img.save(filename=jpgfilepath)
 				os.remove(filepath) #deletes vector file
 				found_cat["image"] = jpgfilepath
-
 		return found_cat
