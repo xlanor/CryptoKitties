@@ -5,7 +5,7 @@
 # Written by xlanor
 ##
 class Tokens():
-		def __init__(self):
+	def __init__(self):
 		self.live = "bot token here"
 		self.errorchannel = "error channel here"
 		self.livechannel = "live channel here"
