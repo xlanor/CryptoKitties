@@ -1,4 +1,4 @@
-# Meow
+# Meow [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A telegram bot to scan CryptoKitties API to report on kittens with a certain desirable trait.
 
