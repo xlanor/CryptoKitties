@@ -24,13 +24,11 @@ Thanks to [Python-Telegram-Bot](https://github.com/python-telegram-bot/python-te
 
 
 ## General Setup guide
-* Install dependencies
+* Install setup.py
 * Setup a mysql db (reccomend you use Cryptokitties as the title)
 * put your creds in tokens file.
 * Put your bot api in the tokens file as well.
-* Create a telegram channel to use for error messages (two if you want to broadcast to a channel) and place the IDs of the channel in tokens file accordingly.
-* I'll be removing channel broadcast soon since that's mainly hardcoded for my colleagues
-* Comment out the job repeating in cryptokitties.py (the one with a value of 300)
+* Create a telegram channel to use for error messages and place the ID of the channel in tokens file according
 * Run createdb.py
 * rename tokens-sample.py to tokens.py
 * Replace filepaths in both modules.
