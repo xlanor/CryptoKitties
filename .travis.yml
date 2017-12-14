@@ -8,11 +8,11 @@ services:
     mysql
 
 before_install:
-    - mysql -e 'CREATE DATABASE IF NOT EXISTS Cryptokittes;'
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS Cryptokitties;'
 
 script:
     - python setup.py
-    - python src/createdb.py 
+    - python createdb.py 
 
 after_success:
-    - python3 src/cryptokitties.py
+    - python3 cryptokitties.py
