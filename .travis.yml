@@ -1,23 +1,18 @@
 language: python
+
 python:
-	- "3.2"
-	- "3.3"
-	- "3.4"
-	- "3.5"
+    - 3.4
+    - 3.5
 
 services:
-	mysql
+    mysql
 
 before_install:
-	- mysql -e 'CREATE DATABASE IF NOT EXISTS Cryptokittes;'
-
-test:
-	adapter: mysql2
-	database: Cryptokitties
-	username: root
-	encoding: utf8
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS Cryptokittes;'
 
 script:
-	python3 setup.py #setup.py should install from requirements.txt
-	python3 createdb.py #create tables
-	python3 cryptokitties.py #launch bot.
+    python setup.py
+    python createdb.py 
+
+after_success:
+    python3 cryptokitties.py
