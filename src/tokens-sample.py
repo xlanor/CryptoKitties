@@ -8,7 +8,6 @@ class Tokens():
 	def __init__(self):
 		self.live = "bot token here"
 		self.errorchannel = "error channel here"
-		self.livechannel = "live channel here"
 		self.host = "host"
 		self.usn = "username"
 		self.pwd = "password"
@@ -23,6 +22,3 @@ class Tokens():
 
 	def error_channel(self):
 		return self.errorchannel
-
-	def live_channel(self):
-		return self.livechannel
