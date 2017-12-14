@@ -6,9 +6,11 @@
 ##
 
 import pymysql,traceback
+import logging
 from contextlib import closing
 from tokens import Tokens
 
+logging.basicConfig(filename="createdb.log", level=logging.DEBUG)
 
 create_user_table_string = """
 							CREATE TABLE IF NOT EXISTS Cryptokitties.User (
@@ -28,24 +30,29 @@ create_attributes_table_string = """
 										)
 								"""
 class CreateDb():
+	def __init__(self):
+		token_list = Tokens().mysql()
+		self.conn = pymysql.connect(**token_list)
+		self.conn.autocommit(True)
+
 	def create_user_table(self):
 		try:
-			with closing (pymysql.connect(Tokens.mysql('host'),Tokens.mysql('usn'),Tokens.mysql('pwd'),Tokens.mysql('db'),charset='utf8')) as conn:
-				conn.autocommit(True)
-				with closing(conn.cursor()) as cur:
-					cur.execute(create_user_table_string) #Change cryptokitties to whatever you call your db in tokens.
+			with closing(self.conn.cursor()) as cur:
+				cur.execute(create_user_table_string) #Change cryptokitties to whatever you call your db in tokens.
+
 		except Exception as e:
 			catcherror = traceback.format_exc()
 			self.write_error(catcherror)
+
 		else:
 			self.write_error('User Table Sucessfully created')
 
 	def create_attributes_table(self):
 		try:
-			with closing (pymysql.connect(Tokens.mysql('host'),Tokens.mysql('usn'),Tokens.mysql('pwd'),Tokens.mysql('db'),charset='utf8')) as conn:
-				conn.autocommit(True)
-				with closing(conn.cursor()) as cur:
-					cur.execute(create_attributes_table_string)
+			with closing(self.conn.cursor()) as cur:
+				cur.execute(create_attributes_table_string)
+
+			conn.close()
 		except Exception as e:
 			catcherror = traceback.format_exc()
 			self.write_error(catcherror)
@@ -53,9 +60,7 @@ class CreateDb():
 			self.write_error('Attributes table successfully created')
 
 	def write_error(self,error):
-		with open('logs.txt','a') as f:
-			f.write(str(error))
-			f.write(traceback.format_exc())
+		logging.debug(error)
 
 if __name__ == '__main__':
 	CreateDb().create_user_table()

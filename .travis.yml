@@ -1,0 +1,19 @@
+language: python
+
+python:
+    - 3.4
+    - 3.5
+
+services:
+    mysql
+
+before_install:
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS Cryptokitties;'
+
+script:
+    - python setup.py build
+    - python setup.py install
+    - python src/createdb.py 
+
+after_success:
+    - python3 src/cryptokitties.py
