@@ -6,8 +6,8 @@
 ##
 class Tokens():
 	def __init__(self):
-		self.live = "270485614:AAHfiqksKZ8WmR2zSjiQ7_v4TMAKdiHm9T0" # a dummy bot token I found online so that telegram wont throw an exception and allow travis to build
-		self.errorchannel = "-1001373051320" # a dummy private channel I created so that telegram wont throw an exception and allow travis to build
+		self.live = "dummy" # a dummy bot token I found online so that telegram wont throw an exception and allow travis to build
+		self.errorchannel = "dummy" # a dummy private channel I created so that telegram wont throw an exception and allow travis to build
 		self.host = "localhost" #travis db
 		self.usn = "root"  #travis db
 		self.pwd = ""	#travis db
