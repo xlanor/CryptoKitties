@@ -34,7 +34,6 @@ class CreateDb():
 		token_list = Tokens().mysql()
 		self.conn = pymysql.connect(**token_list)
 		self.conn.autocommit(True)
-		self.logger =
 
 	def create_user_table(self):
 		try:
