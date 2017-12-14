@@ -11,7 +11,8 @@ before_install:
     - mysql -e 'CREATE DATABASE IF NOT EXISTS Cryptokitties;'
 
 script:
-    - python setup.py
+    - python setup.py build
+    - python setup.py install
     - python src/createdb.py 
 
 after_success:
