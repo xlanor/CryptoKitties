@@ -12,7 +12,7 @@ before_install:
 
 script:
     - python setup.py
-    - python createdb.py 
+    - python src/createdb.py 
 
 after_success:
-    - python3 cryptokitties.py
+    - python3 src/cryptokitties.py
