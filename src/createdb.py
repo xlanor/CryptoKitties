@@ -6,9 +6,11 @@
 ##
 
 import pymysql,traceback
+import logging
 from contextlib import closing
 from tokens import Tokens
 
+logging.basicConfig(filename="createdb.log", level=logging.DEBUG)
 
 create_user_table_string = """
 							CREATE TABLE IF NOT EXISTS Cryptokitties.User (
@@ -32,6 +34,7 @@ class CreateDb():
 		token_list = Tokens().mysql()
 		self.conn = pymysql.connect(**token_list)
 		self.conn.autocommit(True)
+		self.logger =
 
 	def create_user_table(self):
 		try:
@@ -58,9 +61,7 @@ class CreateDb():
 			self.write_error('Attributes table successfully created')
 
 	def write_error(self,error):
-		with open('logs.txt','a') as f:
-			f.write(str(error))
-			f.write(traceback.format_exc())
+		logging.debug(error)
 
 if __name__ == '__main__':
 	CreateDb().create_user_table()
